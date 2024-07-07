@@ -1,0 +1,46 @@
+Name: Fire
+Description: A vibrant, flickering element that radiates heat and light. It consumes fuel and oxygen, dancing unpredictably.
+
+Name: Water
+Description: A clear, fluid substance that flows and adapts to its container. It can exist in liquid, solid, or gaseous states.
+
+Name: Earth
+Description: A solid, diverse element comprising soil, rocks, and minerals. It provides stability and sustenance, forming the ground beneath us.
+
+Name: Wind
+Description: An invisible force of moving air, capable of gentle breezes or powerful gusts. It carries scents, seeds, and can shape landscapes over time.
+
+Those are the elementary elements, everyone starts with that
+
+Alchemy LLM Function
+
+Input: Two Elements and Their Descriptions
+Prompt: Alchemy Prompt + Alchemy GBNF
+Output: Resulting Element and Their Description
+Staged Generation?
+
+Alchemy Transmutation Function
+
+Input: One Element and Their Description
+Prompt: Transmutation Prompt + Transmutation GBNF
+Output: One Creature and Their Description
+Staged Generation?
+
+Creature Evolve Function
+
+Input: One Creature and Their Description
+Prompt: Evolution Prompt + Evolution GBNF
+Output: One Waifu and Their Description
+Prompt: Visual Appearance Prompt + Appearance GBNF (also tags for Stable Diffusion, why not?)
+Input: One Waifu and Their Appearance
+Output: Waifu's Appearance and Their Description
+Input: One Waifu, Their Description, and Their Appearance
+Prompt: Behavior Prompt + Behavior/Trope GBNF
+Output: Waifu's Behavior and Quirks
+
+Waifu PFP Function (Optional, Do Later)
+
+Input: One Waifu and Their Face Description
+Output: A Stable Diffusion Prompt For Making Waifu Appearance
+Input: One Waifu and Their Body/Clothing Description and Their Face
+Output: A Full Picture of the Waifu

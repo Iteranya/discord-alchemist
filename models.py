@@ -31,20 +31,22 @@ class Creature: # a creature that can be born
     behavior: str
     evolve: str | None # The waifu it will evolve to
 
+# Due to staged Generation, I will try to Initialize everything with None
+# TODO: Make an extra check at Data Manager to make sure that all field is not none
+# Except for picture
 @dataclass
 class Waifu: # a waifu that can be born from the thing... Or evolve from creature???
     # Stage 1 Generation (The Default Stuff)
-    name: str
-    desc: str
-    # Stage 2 Generation (The Randomly Generated Stuff)
-    face: str
-    body: str
-    clothing: str
-    # Stage 3 Generation (Even More Randomly Generated Stuff)
-    archetype:list[str]
-    personality:str
-    quirk:str
-    origin: str # Creature it Evolved From
+    name: str|None=None
+    desc: str|None=None
+    # Stage 2 Generation (The Randomly Generated Stuff, separated because might use tags)
+    face: str|None=None
+    body: str|None=None
+    clothing: str|None=None
+    # Stage 3 Generation (Even More Randomly Generated Stuff, separated because archetype)
+    archetype:list[str]|None=None
+    personality:str|None=None
+    quirk:str|None=None
     # Stage 4 Generation (Planned Feature)
     avatar_picture: str|None = None
     full_picture:str|None = None

@@ -97,22 +97,22 @@ class TestDataManager(unittest.TestCase):
         item1 = "TestItem1"
         item2 = "TestItem1"
         check = check_recipe(item1, item2)
-        self.assertNotEquals(result,check)
+        self.assertNotEqual(result,check)
 
         item1 = "TestItem2"
         item2 = "TestItem2"
         check = check_recipe(item1, item2)
-        self.assertNotEquals(result, check)
+        self.assertNotEqual(result, check)
 
         item1 = "TestItem1"
         item2 = "TestItem3"
         check = check_recipe(item1, item2)
-        self.assertNotEquals(result, check)
+        self.assertNotEqual(result, check)
 
         item1 = "TestItem3"
         item2 = "TestItem2"
         check = check_recipe(item1, item2)
-        self.assertNotEquals(result, check)
+        self.assertNotEqual(result, check)
 
     # def test_owned_creature_operations(self):
     #     user = User(display_name="TestUser")
