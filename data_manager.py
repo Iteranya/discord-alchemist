@@ -41,12 +41,12 @@ def get_material(name: str) -> Optional[Material]: # Get an already discovered m
 def create_recipe(recipe: Recipe):
     return recipe_table.insert(asdict(recipe))
 
-def check_recipe(item1, item2)->Optional[str]: # Check if a recipe already exist before generating
+def check_recipe(item1: str, item2: str) -> Optional[str]:
     recipes = get_all_recipe()
     for recipe in recipes:
-        if (recipe.item1 == item1) or (recipe.item2 == item1):
-            if(recipe.item1 == item2) or (recipe.item2 == item2):
-                return recipe.result
+        # Check if the recipe matches exactly (order doesn't matter)
+        if (recipe.item1 == item1 and recipe.item2 == item2) or (recipe.item1 == item2 and recipe.item2 == item1):
+            return recipe.result
     return None
 
 # Creature functions
