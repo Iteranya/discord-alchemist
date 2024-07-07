@@ -10,6 +10,8 @@ TODO:
 - [x] Prepare the LLM API Function
 - [ ] Create The LLM Prompt Function  (Yes, this part is important, please pay attention)
 - [ ] Unit Test The LLM Function
+- [ ] Create the User Action Function
+- [ ] Unit Test the User Action Function
 - [ ] Debugging Hell
 - [ ] Connect with Discord
 - [ ] Debugging Hell 2, Electric Boogaloo
