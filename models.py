@@ -75,6 +75,10 @@ class OwnedWaifu:
     experience: int = 0
     id: UUID = field(default_factory=uuid4)
 
+
+
+# Some Util Dataclass for API use
+
 @dataclass
 class GenerationRequest: # This is the default Generation Request for LLM API
     prompt: str = ""
@@ -101,4 +105,12 @@ class GenerationRequest: # This is the default Generation Request for LLM API
     grammar: str = ""
     grammar_string: str = ""
 
+@dataclass
+class Result:
+    text: str = ""
+    finish_reason: str = ""
 
+
+@dataclass
+class Response:
+    results: list[Result] = field(default_factory=list)
