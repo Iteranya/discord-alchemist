@@ -12,6 +12,12 @@ class User:
     waifus = []  # Owned Waifus ID
 
 @dataclass
+class Recipe: # To keep track of existing Recipe
+    item1:str
+    item2:str
+    result:str
+
+@dataclass
 class Material: # You know, the thing you use to combine stuff???
     name: str
     desc: str

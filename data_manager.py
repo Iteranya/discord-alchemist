@@ -14,28 +14,40 @@ materials_table = db.table('materials')
 creatures_table = db.table('creatures')
 waifus_table = db.table('waifus')
 archetypes_table = db.table('archetypes')
+recipe_table = db.table('recipes')
 
 # User functions
-def create_user(user: User) -> int:
+def create_user(user: User) -> int: # Used when User uses the bot for the first time
     return users_table.insert(asdict(user))
 
-def get_user(display_name: str) -> Optional[User]:
+def get_user(display_name: str) -> Optional[User]: # Used whenever User uses the bot
     User_query = Query()
     result = users_table.get(User_query.display_name == display_name)
     return User(**result) if result else None
 
-def update_user(user: User) -> List[int]:
+def update_user(user: User) -> List[int]: # Used whenever User finishes an action and something change
     User_query = Query()
     return users_table.update(asdict(user), User_query.display_name == user.display_name)
 
 # Material functions
-def create_material(material: Material) -> int:
+def create_material(material: Material) -> int: # Used to add material into the list of discovered materials
     return materials_table.insert(asdict(material))
 
-def get_material(name: str) -> Optional[Material]:
+def get_material(name: str) -> Optional[Material]: # Get an already discovered material instead of generating
     Material_query = Query()
     result = materials_table.get(Material_query.name == name)
     return Material(**result) if result else None
+
+def create_recipe(recipe: Recipe):
+    return recipe_table.insert(asdict(recipe))
+
+def check_recipe(item1, item2)->Optional[str]: # Check if a recipe already exist before generating
+    recipes = get_all_recipe()
+    for recipe in recipes:
+        if (recipe.item1 == item1) or (recipe.item2 == item1):
+            if(recipe.item1 == item2) or (recipe.item2 == item2):
+                return recipe.result
+    return None
 
 # Creature functions
 def create_creature(creature: Creature) -> int:
@@ -83,3 +95,6 @@ def get_all_waifus() -> List[Waifu]:
 
 def get_all_archetypes() -> List[Archetype]:
     return [Archetype(**archetype) for archetype in archetypes_table.all()]
+
+def get_all_recipe()-> List[Recipe]:
+    return [Recipe(**recipe) for recipe in recipe_table]
