@@ -1,5 +1,6 @@
 # This is where I define the Data Class for the Alchemy Bot
 from dataclasses import *
+from uuid import UUID, uuid4
 
 
 @dataclass
@@ -7,13 +8,14 @@ class User:
     display_name: str
     desc: str = "Standard User"
     materials = ["Fire", "Water", "Wind", "Earth"]
-    creature = [] # Owned Creatures
-    waifus = []  # Owned Waifus
+    creature = [] # Owned Creatures ID
+    waifus = []  # Owned Waifus ID
 
 @dataclass
 class Material: # You know, the thing you use to combine stuff???
     name: str
     desc: str
+    evolve: str | None = None  # The Creature it will evolve to, None by default
 
 @dataclass
 class Creature: # a creature that can be born
@@ -21,22 +23,25 @@ class Creature: # a creature that can be born
     desc: str
     appearance: str
     behavior: str
-    evolve: str # Waifu it evolved to
+    evolve: str | None # The waifu it will evolve to
 
 @dataclass
 class Waifu: # a waifu that can be born from the thing... Or evolve from creature???
-    # Stage 1 Generation
+    # Stage 1 Generation (The Default Stuff)
     name: str
     desc: str
-    # Stage 2 Generation
+    # Stage 2 Generation (The Randomly Generated Stuff)
     face: str
     body: str
     clothing: str
-    # Stage 3 Generation
+    # Stage 3 Generation (Even More Randomly Generated Stuff)
     archetype:list[str]
     personality:str
     quirk:str
     origin: str # Creature it Evolved From
+    # Stage 4 Generation (Planned Feature)
+    avatar_picture: str|None = None
+    full_picture:str|None = None
 
 
 @dataclass
@@ -44,6 +49,25 @@ class Archetype: # an archetype that the waifu can have (Not Auto Generated-ish)
     name: str
     desc: str
 
+
+# These are Unused for Now, Will Implement Later
+@dataclass
+class OwnedCreature:
+    creature_name: str
+    owner_name: str
+    nickname: str = ""
+    level: int = 1
+    experience: int = 0
+    id: UUID = field(default_factory=uuid4)
+
+@dataclass
+class OwnedWaifu:
+    creature_name: str
+    owner_name: str
+    nickname: str = ""
+    level: int = 1
+    experience: int = 0
+    id: UUID = field(default_factory=uuid4)
 
 @dataclass
 class GenerationRequest: # This is the default Generation Request for LLM API
