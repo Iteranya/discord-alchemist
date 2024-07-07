@@ -2,8 +2,9 @@
 A Fun Little AI Powered Bot similar to Infinite Alchemy
 
 TODO: 
-- [ ] Decide the overall gameplay
-- [ ] Prepare the Model Class
+- [x] Decide the overall gameplay
+- [x] Prepare the Model Class
+- [ ] Prepare the Database
 - [ ] Prepare the Data Manager 
 - [ ] Prepare the API
 - [ ] Create The LLM Function  (Yes, this part is important, please pay attention)
