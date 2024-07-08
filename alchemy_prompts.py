@@ -9,20 +9,33 @@ async def materials_from_description_prompt(item1:Material,item2:Material):
     request.stop_sequence = ["###"]
     request.grammar = grammar
     request.grammar_string = grammar
-    request.max_length = 150
-    request.max_tokens = 150
+    request.max_length = 256
+    request.max_tokens = 256
 
     return request
 
 async def creature_from_material_prompt(item: Material):
     request = GenerationRequest()
-    grammar = "root ::= \"Name: [\" words+ \"]\\nDescription: [\" words+ \"]\\n###\"\n\nwords ::= ([^\u03b3\\n\\]\\[])\n"
+    grammar = "root ::= \"Name: [\" words+ \"]\\nDescription: [\" words+ \"]\\nAppearance: [\" words+ \"]\\nBehavior:[\"words+\"]\\n###\"\n\nwords ::= ([^\u03b3\\n\\]\\[])\n"
+    prompt = f"Below is an instruction that describes a task. Write a response that appropriately completes the request.\n\n### Instruction:\nUser will give Creature Creator an item and its description. Creature Creator will then create an animal-like creature, fantastical or otherwise, from that item.\n### Instruction:\nUser: Fire: A vibrant, flickering element that radiates heat and light. It consumes fuel and oxygen, dancing unpredictably.\n\n### Response:\nCreature Creator: Name: [Flamewisp]\nDescription: [A sentient flame that flits through the air, leaving a trail of sparks.]\nAppearance: [A small, elongated flame about the size of a hummingbird, with a constantly shifting form and colors ranging from deep red to bright blue.]\nBehavior: [Curious and energetic, drawn to heat sources. Feeds on combustible materials and grows temporarily when it does so. Can merge with other Flamewisps to form larger entities.]\n\n### Instruction:\nUser: Steam:  [Steam is the vapor form of water, created by the application of heat. It's a colorless, odorless gas composed of water molecules. Steam is used in various applications like power generation, cooking, and even in medical settings. When cooled, it condenses back into liquid water. Steam can be hot and humid, often felt as a misty, warm air.]\n\n### Response:\nCreature Creator: Name: [Vapormist]\nDescription: [An ethereal being composed of ever-shifting steam, capable of changing its density and temperature.]\nAppearance: [A translucent, cloud-like form with no fixed shape. Its body undulates and billows, ranging from barely visible wisps to dense, opaque masses.]\nBehavior: [Cycles between gaseous and liquid states. Thrives in warm environments and dissipates in cold ones. Can envelop objects or creatures, temporarily obscuring them from view.]\n\n### Instruction:\nUser: Mud: [Mud is a mixture of water and soil. It's a soft, damp earth material that can range in consistency from a thick, gooey paste to a loose, crumbly mixture. Mud often forms in wet areas or when soil gets saturated with rainwater. It's commonly used for art projects, building structures, and even as a natural remedy for skin issues.]\n\n### Response:\nCreature Creator: Name: [Mudling]\nDescription: [A living, intelligent entity comprised of mud.]\nAppearance: [A lump-shaped creature, covered in a dark, earthy skin. Its limbs are slender and flexible, made of compacted mud. It has no distinct facial features but has two small, glowing eyes that flicker when it moves.]\nBehavior:[Lives in damp environments. Can change its shape to adapt to its surroundings. Absorbs moisture from the air and can move by sliding over surfaces.]\n\n### Instruction:\nUser: {item.name}: [{item.desc}]\n\n### Response(length=medium): \nCreature Creator:"
+    request.prompt = prompt
+    request.stop_sequence = ["###"]
+    request.grammar = grammar
+    request.grammar_string = grammar
+    request.max_length = 512
+    request.max_tokens = 512
+
+    return request
+
+async def waifu_stage_one_prompt(creature: Creature):
+    request = GenerationRequest()
+    grammar = ""
     prompt = f""
     request.prompt = prompt
     request.stop_sequence = ["###"]
     request.grammar = grammar
     request.grammar_string = grammar
-    request.max_length = 150
-    request.max_tokens = 150
+    request.max_length = 512
+    request.max_tokens = 512
 
     return request
