@@ -13,7 +13,7 @@ from models import *
 
 #
 
-def extract_bracketed_content(text):
+def extract_bracketed_content(text:str):
     pattern = r'\[(.*?)\]'
     matches = re.findall(pattern, text, re.DOTALL)
     return [match.strip() for match in matches]
@@ -23,15 +23,9 @@ def extract_bracketed_content(text):
 
 # Okay, first, Creature Response
 
-example_creature = """
-    Name: [Train Abomination]
-    Description: [Literally A Gigantic Spider Train Abomination]
-    Appearance: [Big, Much Legs, Scary]
-    Behavior: [Eats Humans]
-    Evolve: [Train Arachne]
-"""
 
-def extract_generated_creature(text)->Optional[Creature]:
+
+def extract_generated_creature(text:str)->Optional[Creature]:
     extraction =extract_bracketed_content(text)
     try:
         name = extraction[0]
@@ -51,12 +45,9 @@ def extract_generated_creature(text)->Optional[Creature]:
         print("Generation Failed, Try Again~")
         return None
 
-example_generated_material= """
-    Name: [Cloud]
-    Description: [Soft and fluffy and cloudy~]
-"""
 
-def extract_material(text)->Optional[Material]:
+
+def extract_material(text:str)->Optional[Material]:
     ex = extract_bracketed_content(text)
     try:
         name = ex[0]
@@ -80,7 +71,7 @@ example_waifu_gen1 = """
     Desc:   [A shockingly beautiful woman wearing a train conductor uniform with the lower body
             of a giant spider.] 
 """
-def extract_waifu_gen1(text)->Optional[Waifu]:
+def extract_waifu_gen1(text:str)->Optional[Waifu]:
     ex = extract_bracketed_content(text)
     try:
         name = ex[0]
@@ -99,7 +90,7 @@ example_waifu_gen2 = """
     Body:   [Tall, Voluptous, Spider Leg, Human Arms and Hands] 
     Clothing: [uniform, formal, train conductor, cleavage, hat]
 """
-def extract_waifu_gen2(text,waifu)->Optional[Waifu]:
+def extract_waifu_gen2(text:str,waifu:Waifu)->Optional[Waifu]:
     ex = extract_bracketed_content(text)
     try:
         waifu.face = ex[0]
@@ -116,7 +107,7 @@ example_waifu_gen3 = """
     Quirk: [Likes whistle, zoomies on tracks, snacks on coal]
 """
 
-def extract_waifu_gen3(text,waifu)->Optional[Waifu]:
+def extract_waifu_gen3(text:str,waifu:Waifu)->Optional[Waifu]:
     ex = extract_bracketed_content(text)
     try:
         waifu.archetype = ex[0]+ex[1]+ex[2]

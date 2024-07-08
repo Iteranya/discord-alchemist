@@ -14,6 +14,13 @@ Those are the elementary elements, everyone starts with that
 
 Alchemy LLM Function
 
+root ::= "Name: [" words+ "]\nDescription: [" words+ "]\n###" \nwords ::= ([^γ\n\]\[])
+
+
+Name: [Cloud]
+Description: [Soft and fluffy and cloudy~]
+
+
 Input: Two Elements and Their Descriptions
 Prompt: Alchemy Prompt + Alchemy GBNF
 Output: Resulting Element and Their Description
@@ -21,12 +28,29 @@ Staged Generation?
 
 Alchemy Transmutation Function
 
+Name: [Train Abomination]
+Description: [Literally A Gigantic Spider Train Abomination]
+Appearance: [Big, Much Legs, Scary]
+Behavior: [Eats Humans]
+Evolve: [Train Arachne]
+
 Input: One Element and Their Description
 Prompt: Transmutation Prompt + Transmutation GBNF
 Output: One Creature and Their Description
 Staged Generation?
 
 Creature Evolve Function
+
+Name: [Train Arachne]
+Desc: [A shockingly beautiful woman wearing a train conductor uniform with the lower body of a giant spider.]
+
+Face: [Black Eyes, Blue Hair, Short Hair, Cute]
+Body: [Tall, Voluptous, Spider Leg, Human Arms and Hands]
+Clothing: [uniform, formal, train conductor, cleavage, hat]
+
+Archetype: [Gentle Giant],[Dandere],[Office Woman]
+Personality: [Cute and adorable and nice and such]
+Quirk: [Likes whistle, zoomies on tracks, snacks on coal]
 
 Input: One Creature and Their Description
 Prompt: Evolution Prompt + Evolution GBNF
