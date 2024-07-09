@@ -99,13 +99,22 @@ def extract_waifu_gen2(text:str,waifu:Waifu)->Optional[Waifu]:
         print("Generation Failed, Try Again~")
         return None
 
-def extract_waifu_gen3(text:str,waifu:Waifu)->Optional[Waifu]:
+def extract_waifu_gen3(text:str,waifu:Waifu,arch1:Archetype,arch2:Archetype)->Optional[OwnedWaifu]:
     ex = extract_bracketed_content(text)
     try:
-        waifu.personality = ex[0]
-        waifu.quirk = ex[1]
-        waifu.fetish = ex[2]
-        return waifu
+        owned_waifu = OwnedWaifu(
+            waifu.name,
+            waifu.name + "-chan",
+            1,
+            0,
+            [arch1.name,arch2.name],
+            ex[0],
+            ex[1],
+            ex[2],
+            None,
+            None
+        )
+        return owned_waifu
     except(IndexError):
         print("Generation Failed, Try Again~")
         return None

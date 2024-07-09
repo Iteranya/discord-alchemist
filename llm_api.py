@@ -1,13 +1,15 @@
 import json
 
 from aiohttp import *
+
+import data_manager
 from models import *
 from data_manager import *
 import config
 
 
 
-async def send_to_llm(prompt: GenerationRequest) -> Response | None:
+async def send_to_llm(prompt: GenerationRequest) -> str | None:
     # Get the queue item that's next in the list
     timeout = ClientTimeout(total=600)
     connector = TCPConnector(limit_per_host=10)
@@ -23,7 +25,7 @@ async def send_to_llm(prompt: GenerationRequest) -> Response | None:
                         json_response = await response.json()
                         print("JSON response get")
                         print(json_response)
-                        return data_manager.read_results_from_json(json_response)
+                        return read_results_from_json(json_response)
                     except json.decoder.JSONDecodeError as e:
                         print(f"JSON decode error: {e}")
                         return None
@@ -35,3 +37,13 @@ async def send_to_llm(prompt: GenerationRequest) -> Response | None:
             # Handle any other exceptions
             print(f"An error occurred: {e}")
             return None
+
+def read_results_from_json(json_data) -> str:
+    response = Response()
+    for result in json_data['results']:
+        response.results.append(Result(
+            text=result['text'],
+            finish_reason=result['finish_reason']
+        ))
+
+    return response.results[0].text

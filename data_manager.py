@@ -55,6 +55,10 @@ def get_material(name: str) -> Optional[Material]: # Get an already discovered m
     result = materials_table.get(Material_query.name == name)
     return Material(**result) if result else None
 
+def update_material(material: Material) -> List[int]:
+    Material_query = Query()
+    return materials_table.update(asdict(material), Material_query.name == material.name)
+
 def create_recipe(recipe: Recipe):
     return recipe_table.insert(asdict(recipe))
 
@@ -74,6 +78,10 @@ def get_creature(name: str) -> Optional[Creature]:
     Creature_query = Query()
     result = creatures_table.get(Creature_query.name == name)
     return Creature(**result) if result else None
+
+def update_creature(creature: Creature) -> List[int]:
+    Creature_query = Query()
+    return creatures_table.update(asdict(creature), Creature_query.name == creature.name)
 
 # Waifu functions
 def create_waifu(waifu: Waifu) -> int:
