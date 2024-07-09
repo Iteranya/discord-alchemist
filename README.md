@@ -17,6 +17,8 @@ TODO:
 - - [x] Make the LLM Function
 - [x] Make Unit Test for the LLM Function
 - [ ] Create the User Action Function
+- - [ ] Figure out what action user can make
+- - [ ] Write the function
 - [ ] Unit Test the User Action Function
 - [ ] Debugging Hell
 - [ ] Connect with Discord
