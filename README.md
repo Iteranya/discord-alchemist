@@ -15,7 +15,7 @@ TODO:
 - - [x] Figure Out if Queueing is Necessary since Kobold Already Took Care of It
 - - [x] Realize that it's best to add that anyway *just in case*
 - - [x] Make the LLM Function
-- [ ] Make Unit Test for the LLM Function
+- [x] Make Unit Test for the LLM Function
 - [ ] Create the User Action Function
 - [ ] Unit Test the User Action Function
 - [ ] Debugging Hell
