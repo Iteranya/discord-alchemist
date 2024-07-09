@@ -39,14 +39,17 @@ class Waifu: # a waifu that can be born from the thing... Or evolve from creatur
     # Stage 1 Generation (The Default Stuff)
     name: str|None=None
     desc: str|None=None
+    appearance: str|None=None
     # Stage 2 Generation (The Randomly Generated Stuff, separated because might use tags)
     face: str|None=None
     body: str|None=None
     clothing: str|None=None
+    ero:str|None=None # Please let no one notice this... I just can't help it.
     # Stage 3 Generation (Even More Randomly Generated Stuff, separated because archetype)
     archetype:list[str]|None=None
     personality:str|None=None
     quirk:str|None=None
+    fetish:str|None=None # I have a chance to turn this from my first game to my first eroge. Of course I'm doing it.
     # Stage 4 Generation (Planned Feature)
     avatar_picture: str|None = None
     full_picture:str|None = None

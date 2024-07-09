@@ -76,9 +76,11 @@ def extract_waifu_gen1(text:str)->Optional[Waifu]:
     try:
         name = ex[0]
         desc = ex[1]
+        appearance = ex[2]
         waifu = Waifu(
             name = name,
-            desc = desc
+            desc = desc,
+            appearance=appearance
         )
         return waifu
     except(IndexError):

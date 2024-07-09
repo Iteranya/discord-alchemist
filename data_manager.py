@@ -3,7 +3,7 @@
 from typing import *
 from tinydb import *
 from models import *
-
+from response_parser import extract_bracketed_content
 
 ## And ask AI's help to write it down for me
 db = TinyDB('main_database.json')
@@ -15,6 +15,23 @@ creatures_table = db.table('creatures')
 waifus_table = db.table('waifus')
 archetypes_table = db.table('archetypes')
 recipe_table = db.table('recipes')
+
+
+def extract_and_store_archetypes(text: str):
+    # Extract all bracketed content
+    contents = extract_bracketed_content(text)
+
+    # Process pairs of contents (name and description)
+    for i in range(0, len(contents), 2):
+        if i + 1 < len(contents):
+            name = contents[i]
+            desc = contents[i + 1]
+
+            # Create an Archetype instance
+            archetype = Archetype(name=name, desc=desc)
+
+            # Insert the archetype into the TinyDB table
+            create_archetype(archetype)
 
 # User functions
 def create_user(user: User) -> int: # Used when User uses the bot for the first time
