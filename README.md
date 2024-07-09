@@ -8,14 +8,14 @@ TODO:
 - [x] Prepare the Data Manager
 - [x] Unit Test the Data Manager
 - [x] Prepare the LLM API Function
-- [ ] Create The LLM Prompt Function  (Yes, this part is important, please pay attention)
-- - [ ] Prompt Engineer with Claude
-- - [ ] GBNF Engineer with Silly Tavern
-- - [ ] Grab The Prompt and GBNF for Function
+- [x] Create The LLM Prompt Function  (Yes, this part is important, please pay attention)
+- - [x] Prompt Engineer with Claude
+- - [x] GBNF Engineer with Silly Tavern
+- - [x] Grab The Prompt and GBNF for Function
 - - [x] Figure Out if Queueing is Necessary since Kobold Already Took Care of It
 - - [x] Realize that it's best to add that anyway *just in case*
-- - [ ] Make the LLM Function
-- [ ] Unit Test The LLM Function
+- - [x] Make the LLM Function
+- [ ] Make Unit Test for the LLM Function
 - [ ] Create the User Action Function
 - [ ] Unit Test the User Action Function
 - [ ] Debugging Hell

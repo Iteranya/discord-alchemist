@@ -87,34 +87,24 @@ def extract_waifu_gen1(text:str)->Optional[Waifu]:
         print("Generation Failed, Try Again~")
         return None
 
-example_waifu_gen2 = """
-    Face:   [Black Eyes, Blue Hair, Short Hair, Cute]
-    Body:   [Tall, Voluptous, Spider Leg, Human Arms and Hands] 
-    Clothing: [uniform, formal, train conductor, cleavage, hat]
-"""
 def extract_waifu_gen2(text:str,waifu:Waifu)->Optional[Waifu]:
     ex = extract_bracketed_content(text)
     try:
         waifu.face = ex[0]
         waifu.body = ex[1]
         waifu.clothing = ex[2]
+        waifu.ero = ex[3]
         return waifu
     except(IndexError):
         print("Generation Failed, Try Again~")
         return None
 
-example_waifu_gen3 = """
-    Archetype:   [Gentle Giant],[Dandere],[Office Woman]
-    Personality:   [Cute and adorable and nice and such] 
-    Quirk: [Likes whistle, zoomies on tracks, snacks on coal]
-"""
-
 def extract_waifu_gen3(text:str,waifu:Waifu)->Optional[Waifu]:
     ex = extract_bracketed_content(text)
     try:
-        waifu.archetype = ex[0]+ex[1]+ex[2]
-        waifu.personality = ex[3]
-        waifu.quirk = ex[4]
+        waifu.personality = ex[0]
+        waifu.quirk = ex[1]
+        waifu.fetish = ex[2]
         return waifu
     except(IndexError):
         print("Generation Failed, Try Again~")
