@@ -1,14 +1,14 @@
-Name: Fire
-Description: A vibrant, flickering element that radiates heat and light. It consumes fuel and oxygen, dancing unpredictably.
+Name: [Fire]
+Description: [A vibrant, flickering element that radiates heat and light. It consumes fuel and oxygen, dancing unpredictably.]
 
-Name: Water
-Description: A clear, fluid substance that flows and adapts to its container. It can exist in liquid, solid, or gaseous states.
+Name: [Water]
+Description: [A clear, fluid substance that flows and adapts to its container. It can exist in liquid, solid, or gaseous states.]
 
-Name: Earth
-Description: A solid, diverse element comprising soil, rocks, and minerals. It provides stability and sustenance, forming the ground beneath us.
+Name: [Earth]
+Description: [A solid, diverse element comprising soil, rocks, and minerals. It provides stability and sustenance, forming the ground beneath us.]
 
-Name: Wind
-Description: An invisible force of moving air, capable of gentle breezes or powerful gusts. It carries scents, seeds, and can shape landscapes over time.
+Name: [Wind]
+Description: [An invisible force of moving air, capable of gentle breezes or powerful gusts. It carries scents, seeds, and can shape landscapes over time.]
 
 Those are the elementary elements, everyone starts with that
 

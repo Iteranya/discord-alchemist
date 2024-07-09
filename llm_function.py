@@ -12,8 +12,11 @@ from models import *
 
 async def generate_material_from_two_items(mat1_name : str,  mat2_name: str)->None|Material:
     # Get the material desc etc
-    mat1 = data_manager.get_material(mat1_name)
-    mat2 = data_manager.get_material(mat2_name)
+    try:
+        mat1 = data_manager.get_material(mat1_name)
+        mat2 = data_manager.get_material(mat2_name)
+    except:
+        return None
 
     # Find if this combination is already dicovered
     existing_material:str = data_manager.check_recipe(mat1.name,mat2.name)

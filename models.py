@@ -29,7 +29,7 @@ class Creature: # a creature that can be born
     desc: str
     appearance: str
     behavior: str
-    evolve: str | None # The waifu it will evolve to
+    evolve: str | None = None # The waifu it will evolve to
 
 # Due to staged Generation, I will try to Initialize everything with None
 # TODO: Make an extra check at Data Manager to make sure that all field is not none

@@ -123,3 +123,22 @@ def get_all_archetypes() -> List[Archetype]:
 
 def get_all_recipe()-> List[Recipe]:
     return [Recipe(**recipe) for recipe in recipe_table]
+
+
+# Trim Database
+def trim():
+    all_record = waifus_table.all()
+    unique_names = set()
+    duplicate_ids = []
+
+    for record in all_record:
+        name = record['name']
+        if name in unique_names:
+            duplicate_ids.append(record.doc_id)
+        else:
+            unique_names.add(name)
+
+    for doc_id in duplicate_ids:
+        waifus_table.remove(doc_ids=[doc_id])
+
+    print(f"Trimmed materials table. Removed {len(duplicate_ids)} duplicates.")

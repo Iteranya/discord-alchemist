@@ -204,7 +204,7 @@ Waifu Archetype Personality: [Dependable, supportive, and quietly yearning. Her 
 
 def function_to_test():
     # This is the function you'll edit to run your tests
-    data_manager.extract_and_store_archetypes(archetype)
+    data_manager.trim()
     # Add your test code here
     # For example:
     # result = some_function(some_args)

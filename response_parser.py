@@ -32,13 +32,11 @@ def extract_generated_creature(text:str)->Optional[Creature]:
         description = extraction[1]
         appearance = extraction[2]
         behavior = extraction[3]
-        evolve = extraction[4]
         creature = Creature(
             name=name,
             desc=description,
             appearance=appearance,
-            behavior=behavior,
-            evolve=evolve
+            behavior=behavior
         )
         return creature
     except(IndexError):

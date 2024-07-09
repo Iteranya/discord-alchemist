@@ -4,7 +4,6 @@ from typing import *
 import aiofiles
 import requests
 
-
 global text_api
 
 async def set_api(config_file: str) -> dict[str, Any]:
@@ -31,6 +30,8 @@ async def api_status_check(link: str, headers):
     return status
 
 async def setup():
+    global text_api
     text_api = await set_api("text-default.json")
-    await api_status_check(text_api["address"] + text_api["model"],headers=text_api["headers"])
+    status = await api_status_check(text_api["address"] + text_api["model"], headers=text_api["headers"])
+    return status
 
