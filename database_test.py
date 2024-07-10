@@ -25,12 +25,12 @@ class TestDataManager(unittest.TestCase):
         self.db.close()
 
     def test_user_operations(self):
-        user = User(display_name="TestUser")
+        user = User(name="TestUser")
         user_id = create_user(user)
         self.assertIsNotNone(user_id)
 
         retrieved_user = get_user("TestUser")
-        self.assertEqual(retrieved_user.display_name, "TestUser")
+        self.assertEqual(retrieved_user.name, "TestUser")
 
         user.desc = "Updated User"
         update_user(user)
@@ -139,8 +139,8 @@ class TestDataManager(unittest.TestCase):
 
     def test_get_all_operations(self):
         # Create some test data
-        create_user(User(display_name="TestUser1"))
-        create_user(User(display_name="TestUser2"))
+        create_user(User(name="TestUser1"))
+        create_user(User(name="TestUser2"))
         create_material(Material(name="TestMaterial1", desc="Test Description 1"))
         create_material(Material(name="TestMaterial2", desc="Test Description 2"))
         create_creature(Creature(name="TestCreature1", desc="Test Description 1", appearance="Test Appearance 1",

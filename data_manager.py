@@ -15,6 +15,7 @@ creatures_table = db.table('creatures')
 waifus_table = db.table('waifus')
 archetypes_table = db.table('archetypes')
 recipe_table = db.table('recipes')
+owned_waifus_table = db.table('owned_waifus')
 
 
 def extract_and_store_archetypes(text: str):
@@ -44,7 +45,7 @@ def get_user(display_name: str) -> Optional[User]: # Used whenever User uses the
 
 def update_user(user: User) -> List[int]: # Used whenever User finishes an action and something change
     User_query = Query()
-    return users_table.update(asdict(user), User_query.display_name == user.display_name)
+    return users_table.update(asdict(user), User_query.display_name == user.name)
 
 # Material functions
 def create_material(material: Material) -> int: # Used to add material into the list of discovered materials
@@ -95,6 +96,20 @@ def get_waifu(name: str) -> Optional[Waifu]:
 def update_waifu(waifu: Waifu) -> List[int]:
     Waifu_query = Query()
     return waifus_table.update(asdict(waifu), Waifu_query.name == waifu.name)
+
+# Owned Waifu Function
+
+def create_owned_waifu(waifu: OwnedWaifu) -> int:
+    return owned_waifus_table.insert(asdict(waifu))
+
+def get_owned_waifu(name: str) -> Optional[OwnedWaifu]:
+    Waifu_query = Query()
+    result = owned_waifus_table.get(Waifu_query.name == name)
+    return Waifu(**result) if result else None
+
+def update_owned_waifu(waifu: OwnedWaifu) -> List[int]:
+    Waifu_query = Query()
+    return owned_waifus_table.update(asdict(waifu), Waifu_query.name == waifu.name)
 
 # Archetype functions
 def create_archetype(archetype: Archetype) -> int:

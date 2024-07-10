@@ -5,11 +5,11 @@ from uuid import UUID, uuid4
 
 @dataclass
 class User:
-    display_name: str
+    name: str
     desc: str = "Standard User"
     materials = ["Fire", "Water", "Wind", "Earth"]
-    creature = [] # Owned Creatures ID
-    waifus = []  # Owned Waifus ID
+    creature = [] # Owned Creatures NAME
+    waifus = []  # Owned Waifus NAME
 
 @dataclass
 class Recipe: # To keep track of existing Recipe
@@ -33,7 +33,6 @@ class Creature: # a creature that can be born
 
 # Due to staged Generation, I will try to Initialize everything with None
 # TODO: Make an extra check at Data Manager to make sure that all field is not none
-# Except for picture
 @dataclass
 class Waifu: # a waifu that can be born from the thing... Or evolve from creature???
     # Stage 1 Generation (The Default Stuff)
@@ -46,6 +45,33 @@ class Waifu: # a waifu that can be born from the thing... Or evolve from creatur
     clothing: str|None=None
     ero:str|None=None # Please let no one notice this... I just can't help it.
 
+@dataclass
+class OwnedWaifu:
+    id: UUID = field(default_factory=uuid4)
+    name: str = "" # Basically, the species name
+    nickname: str = ""
+    desc: str | None = None
+    appearance: str | None = None
+    # Stage 2 Generation (The Randomly Generated Stuff, separated because might use tags)
+    face: str | None = None
+    body: str | None = None
+    clothing: str | None = None
+    ero: str | None = None
+    # Stage 3 Generation (Even More Randomly Generated Stuff, separated because archetype)
+    archetype:list[str]|None=None
+    personality:str|None=None
+    quirk:str|None=None
+    fetish:str|None=None # I have a chance to turn this from my first game to my first eroge. Of course I'm doing it.
+    # Stage 4 Generation (Planned Feature)
+    avatar_picture: str|None = None
+    full_picture:str|None = None
+    # Misc Stuff
+    gifts:list[str]|None=None # Stuff you've given to your waifu
+    affection: int=0 # How much your waifu loves you
+    lewd: int=0 # How lewd your waifu is (Again, this is an eroge, I don't care)
+
+    # Also, I can slap this to RenPy if I want
+    # That could be pretty interesting, Steam Worthy I say!
 
 @dataclass
 class Archetype: # an archetype that the waifu can have (Not Auto Generated-ish)
@@ -56,26 +82,39 @@ class Archetype: # an archetype that the waifu can have (Not Auto Generated-ish)
 # These are Unused for Now, Will Implement Later
 @dataclass
 class OwnedCreature:
-    waifu_name: str
-    nickname: str = ""
-    level: int = 1
-    experience: int = 0
+    name:str
+    nickname:str
+    description:str
 
+# I just found the perfect use for this...
+@dataclass
+class Base:
+    name: str|None=None
+    desc: str|None=None
+    facilities: list[str]|None=None # "Upgrades" for the alchemy and transmutation table
+    pens: list[str]|None=None # Where you put your creatures to interact
+    dorms: list[str]|None=None # Where you put your waifu (you can put a few creatures there too as a pet)
 
 @dataclass
-class OwnedWaifu:
-    creature_name: str
-    nickname: str = ""
-    level: int = 1
-    experience: int = 0
-    # Stage 3 Generation (Even More Randomly Generated Stuff, separated because archetype)
-    archetype:list[str]|None=None
-    personality:str|None=None
-    quirk:str|None=None
-    fetish:str|None=None # I have a chance to turn this from my first game to my first eroge. Of course I'm doing it.
-    # Stage 4 Generation (Planned Feature)
-    avatar_picture: str|None = None
-    full_picture:str|None = None
+class Pen:
+    name:str|None=None
+    desc:str|None=None
+    furnitures: list[str]|None=None
+    creatures: list[str]|None=None
+    history: list[str]|None=None # Okay, imma keep it real with you chief, I don't think this part is possible
+
+@dataclass
+class Dorm:
+    name:str|None=None
+    desc:str|None=None
+    furnitures: list[str]|None=None
+    waifus: list[str]|None=None
+    creature: list[str]|None=None # These are pets
+
+
+
+
+
 
 
 
