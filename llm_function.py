@@ -32,8 +32,8 @@ async def generate_material_from_two_items(mat1_name : str,  mat2_name: str)->No
         new_recipe = Recipe(
             mat1.name,mat2.name,new_material.name
         )
-        data_manager.create_material(new_material)
-        data_manager.create_recipe(new_recipe)
+        # data_manager.create_material(new_material)
+        # data_manager.create_recipe(new_recipe)
         return new_material
 
 async def generate_creature_from_material(mat_name:str):
@@ -45,9 +45,9 @@ async def generate_creature_from_material(mat_name:str):
         prompt = alchemy_prompts.creature_from_material_prompt(mat)
         result = await llm_api.send_to_llm(prompt)
         new_creature = response_parser.extract_generated_creature(result)
-        data_manager.create_creature(new_creature)
+        # data_manager.create_creature(new_creature)
         mat.evolve = new_creature.name
-        data_manager.update_material(mat)
+        # data_manager.update_material(mat)
         return new_creature
 
 async def generate_waifu(creature_name:str):
@@ -71,8 +71,8 @@ async def generate_waifu(creature_name:str):
         # Update creature so that it contains waifu evolution
         creature.name = new_waifu.name
         # Insert new waifu and updated creature into database
-        data_manager.create_waifu(new_waifu)
-        data_manager.update_creature(creature)
+        # data_manager.create_waifu(new_waifu)
+        # data_manager.update_creature(creature)
         return new_waifu
 
 

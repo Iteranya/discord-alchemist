@@ -1,10 +1,16 @@
+import asyncio
 import json
 from typing import *
 
 import aiofiles
+import discord
 import requests
 
 global text_api
+rpg_queue = asyncio.Queue()
+# FOR DISCORD
+intents: discord.Intents = discord.Intents.all()
+client: discord.Client = discord.Client(command_prefix='/', intents=intents)
 
 async def set_api(config_file: str) -> dict[str, Any]:
     # Read the configuration file
@@ -34,4 +40,3 @@ async def setup():
     text_api = await set_api("text-default.json")
     status = await api_status_check(text_api["address"] + text_api["model"], headers=text_api["headers"])
     return status
-

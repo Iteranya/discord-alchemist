@@ -34,34 +34,51 @@ def extract_and_store_archetypes(text: str):
             # Insert the archetype into the TinyDB table
             create_archetype(archetype)
 
+
 # User functions
-def create_user(user: User) -> int: # Used when User uses the bot for the first time
+def create_user(user: User) -> int:  # Used when User uses the bot for the first time
     return users_table.insert(asdict(user))
 
-def get_user(display_name: str) -> Optional[User]: # Used whenever User uses the bot
+
+def get_user(display_name: str) -> Optional[User]:  # Used whenever User uses the bot
     User_query = Query()
     result = users_table.get(User_query.display_name == display_name)
     return User(**result) if result else None
 
-def update_user(user: User) -> List[int]: # Used whenever User finishes an action and something change
+
+def update_user(user: User) -> List[int]:  # Used whenever User finishes an action and something change
     User_query = Query()
     return users_table.update(asdict(user), User_query.display_name == user.name)
 
+
 # Material functions
-def create_material(material: Material) -> int: # Used to add material into the list of discovered materials
+def create_material(material: Material) -> int:  # Used to add material into the list of discovered materials
     return materials_table.insert(asdict(material))
 
-def get_material(name: str) -> Optional[Material]: # Get an already discovered material instead of generating
+
+def get_material(name: Union[str, List[str]]) -> Union[Optional[Material], List[Optional[Material]]]:
     Material_query = Query()
-    result = materials_table.get(Material_query.name == name)
-    return Material(**result) if result else None
+
+    if isinstance(name, str):
+        result = materials_table.get(Material_query.name == name)
+        return Material(**result) if result else None
+
+    elif isinstance(name, list):
+        results = materials_table.search(Material_query.name.one_of(name))
+        return [Material(**result) if result else None for result in results]
+
+    else:
+        raise ValueError("Input must be a string or a list of strings")
+
 
 def update_material(material: Material) -> List[int]:
     Material_query = Query()
     return materials_table.update(asdict(material), Material_query.name == material.name)
 
+
 def create_recipe(recipe: Recipe):
     return recipe_table.insert(asdict(recipe))
+
 
 def check_recipe(item1: str, item2: str) -> Optional[str]:
     recipes = get_all_recipe()
@@ -71,72 +88,128 @@ def check_recipe(item1: str, item2: str) -> Optional[str]:
             return recipe.result
     return None
 
+
 # Creature functions
 def create_creature(creature: Creature) -> int:
-    return creatures_table.insert(asdict(creature))
-
-def get_creature(name: str) -> Optional[Creature]:
     Creature_query = Query()
-    result = creatures_table.get(Creature_query.name == name)
-    return Creature(**result) if result else None
+    existing_creature = creatures_table.get(Creature_query.name == creature.name)
+
+    if existing_creature is None:
+        return creatures_table.insert(asdict(creature))
+    else:
+        return -1  # Or any other value to indicate the creature wasn't inserted
+
+
+def get_creature(name: Union[str, List[str]]) -> Union[Optional[Creature], List[Optional[Creature]]]:
+    Creature_query = Query()
+
+    if isinstance(name, str):
+        result = creatures_table.get(Creature_query.name == name)
+        return Creature(**result) if result else None
+
+    elif isinstance(name, list):
+        results = creatures_table.search(Creature_query.name.one_of(name))
+        return [Creature(**result) if result else None for result in results]
+
+    else:
+        raise ValueError("Input must be a string or a list of strings")
+
 
 def update_creature(creature: Creature) -> List[int]:
     Creature_query = Query()
     return creatures_table.update(asdict(creature), Creature_query.name == creature.name)
 
+
 # Waifu functions
 def create_waifu(waifu: Waifu) -> int:
-    return waifus_table.insert(asdict(waifu))
-
-def get_waifu(name: str) -> Optional[Waifu]:
     Waifu_query = Query()
-    result = waifus_table.get(Waifu_query.name == name)
-    return Waifu(**result) if result else None
+    existing_waifu = waifus_table.get(Waifu_query.name == waifu.name)
+
+    if existing_waifu is None:
+        return waifus_table.insert(asdict(waifu))
+    else:
+        return -1
+
+
+def get_waifu(name: Union[str, List[str]]) -> Union[Optional[Waifu], List[Optional[Waifu]]]:
+    Waifu_query = Query()
+
+    if isinstance(name, str):
+        result = waifus_table.get(Waifu_query.name == name)
+        return Waifu(**result) if result else None
+
+    elif isinstance(name, list):
+        results = waifus_table.search(Waifu_query.name.one_of(name))
+        return [Waifu(**result) if result else None for result in results]
+
+    else:
+        raise ValueError("Input must be a string or a list of strings")
+
 
 def update_waifu(waifu: Waifu) -> List[int]:
     Waifu_query = Query()
     return waifus_table.update(asdict(waifu), Waifu_query.name == waifu.name)
+
 
 # Owned Waifu Function
 
 def create_owned_waifu(waifu: OwnedWaifu) -> int:
     return owned_waifus_table.insert(asdict(waifu))
 
-def get_owned_waifu(name: str) -> Optional[OwnedWaifu]:
+
+def get_owned_waifu(owned_waifu_id: Union[UUID, List[UUID]]) -> Union[Optional[OwnedWaifu], List[Optional[OwnedWaifu]]]:
     Waifu_query = Query()
-    result = owned_waifus_table.get(Waifu_query.name == name)
-    return Waifu(**result) if result else None
+
+    if isinstance(owned_waifu_id, UUID):
+        result = owned_waifus_table.get(Waifu_query.id == owned_waifu_id)
+        return OwnedWaifu(**result) if result else None
+
+    elif isinstance(owned_waifu_id, list):
+        results = owned_waifus_table.search(Waifu_query.id.one_of(owned_waifu_id))
+        return [OwnedWaifu(**result) if result else None for result in results]
+
+    else:
+        raise ValueError("Input must be a string or a list of strings")
+
 
 def update_owned_waifu(waifu: OwnedWaifu) -> List[int]:
     Waifu_query = Query()
     return owned_waifus_table.update(asdict(waifu), Waifu_query.name == waifu.name)
 
+
 # Archetype functions
 def create_archetype(archetype: Archetype) -> int:
     return archetypes_table.insert(asdict(archetype))
+
 
 def get_archetype(name: str) -> Optional[Archetype]:
     Archetype_query = Query()
     result = archetypes_table.get(Archetype_query.name == name)
     return Archetype(**result) if result else None
 
+
 # Utility functions
 def get_all_users() -> List[User]:
     return [User(**user) for user in users_table.all()]
 
+
 def get_all_materials() -> List[Material]:
     return [Material(**material) for material in materials_table.all()]
+
 
 def get_all_creatures() -> List[Creature]:
     return [Creature(**creature) for creature in creatures_table.all()]
 
+
 def get_all_waifus() -> List[Waifu]:
     return [Waifu(**waifu) for waifu in waifus_table.all()]
+
 
 def get_all_archetypes() -> List[Archetype]:
     return [Archetype(**archetype) for archetype in archetypes_table.all()]
 
-def get_all_recipe()-> List[Recipe]:
+
+def get_all_recipe() -> List[Recipe]:
     return [Recipe(**recipe) for recipe in recipe_table]
 
 

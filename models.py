@@ -9,7 +9,7 @@ class User:
     desc: str = "Standard User"
     materials = ["Fire", "Water", "Wind", "Earth"]
     creature = [] # Owned Creatures NAME
-    waifus = []  # Owned Waifus NAME
+    waifus = []  # Owned Waifus UUID
 
 @dataclass
 class Recipe: # To keep track of existing Recipe
