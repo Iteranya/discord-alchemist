@@ -101,10 +101,15 @@ def extract_waifu_gen3(text:str,waifu:Waifu,arch1:Archetype,arch2:Archetype)->Op
     ex = extract_bracketed_content(text)
     try:
         owned_waifu = OwnedWaifu(
+            str(uuid4()),
             waifu.name,
             waifu.name + "-chan",
-            1,
-            0,
+            waifu.desc,
+            waifu.appearance,
+            waifu.face,
+            waifu.body,
+            waifu.clothing,
+            waifu.ero,
             [arch1.name,arch2.name],
             ex[0],
             ex[1],

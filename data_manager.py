@@ -36,19 +36,19 @@ def extract_and_store_archetypes(text: str):
 
 
 # User functions
-def create_user(user: User) -> int:  # Used when User uses the bot for the first time
+def create_user(user: Player) -> int:  # Used when User uses the bot for the first time
     return users_table.insert(asdict(user))
 
 
-def get_user(display_name: str) -> Optional[User]:  # Used whenever User uses the bot
+def get_user(display_name: str) -> Optional[Player]:  # Used whenever User uses the bot
     User_query = Query()
-    result = users_table.get(User_query.display_name == display_name)
-    return User(**result) if result else None
+    result = users_table.get(User_query.name == display_name)
+    return Player(**result) if result else None
 
 
-def update_user(user: User) -> List[int]:  # Used whenever User finishes an action and something change
+def update_user(user: Player) -> List[int]:  # Used whenever User finishes an action and something change
     User_query = Query()
-    return users_table.update(asdict(user), User_query.display_name == user.name)
+    return users_table.update(asdict(user), User_query.name == user.name)
 
 
 # Material functions
@@ -58,6 +58,8 @@ def create_material(material: Material) -> int:  # Used to add material into the
 
 def get_material(name: Union[str, List[str]]) -> Union[Optional[Material], List[Optional[Material]]]:
     Material_query = Query()
+
+    print(f"get_material {name}")
 
     if isinstance(name, str):
         result = materials_table.get(Material_query.name == name)
@@ -157,10 +159,10 @@ def create_owned_waifu(waifu: OwnedWaifu) -> int:
     return owned_waifus_table.insert(asdict(waifu))
 
 
-def get_owned_waifu(owned_waifu_id: Union[UUID, List[UUID]]) -> Union[Optional[OwnedWaifu], List[Optional[OwnedWaifu]]]:
+def get_owned_waifu(owned_waifu_id: Union[str, List[str]]) -> Union[Optional[OwnedWaifu], List[Optional[OwnedWaifu]]]:
     Waifu_query = Query()
 
-    if isinstance(owned_waifu_id, UUID):
+    if isinstance(owned_waifu_id, str):
         result = owned_waifus_table.get(Waifu_query.id == owned_waifu_id)
         return OwnedWaifu(**result) if result else None
 
@@ -189,8 +191,8 @@ def get_archetype(name: str) -> Optional[Archetype]:
 
 
 # Utility functions
-def get_all_users() -> List[User]:
-    return [User(**user) for user in users_table.all()]
+def get_all_users() -> List[Player]:
+    return [Player(**user) for user in users_table.all()]
 
 
 def get_all_materials() -> List[Material]:
@@ -215,7 +217,7 @@ def get_all_recipe() -> List[Recipe]:
 
 # Trim Database
 def trim():
-    all_record = waifus_table.all()
+    all_record = users_table.all()
     unique_names = set()
     duplicate_ids = []
 
@@ -227,6 +229,6 @@ def trim():
             unique_names.add(name)
 
     for doc_id in duplicate_ids:
-        waifus_table.remove(doc_ids=[doc_id])
+        users_table.remove(doc_ids=[doc_id])
 
     print(f"Trimmed materials table. Removed {len(duplicate_ids)} duplicates.")

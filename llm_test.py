@@ -7,7 +7,7 @@ import data_manager
 import llm_function
 import response_parser
 from data_manager import (
-    User, Material, Creature, Waifu, Archetype, Recipe,
+    Player, Material, Creature, Waifu, Archetype, Recipe,
     create_user, get_user, update_user,
     create_material, get_material,
     create_creature, get_creature,

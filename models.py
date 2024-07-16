@@ -4,31 +4,31 @@ from uuid import UUID, uuid4
 
 
 @dataclass
-class User:
-    name: str
-    desc: str = "Standard User"
-    materials = ["Fire", "Water", "Wind", "Earth"]
-    creature = [] # Owned Creatures NAME
-    waifus = []  # Owned Waifus UUID
+class Player:
+    name: str|None =None
+    desc: str|None =None
+    materials:list|None =None
+    creature:list|None =None # Owned Creatures NAME
+    waifus:list|None =None  # Owned Waifus UUID
 
 @dataclass
 class Recipe: # To keep track of existing Recipe
-    item1:str
-    item2:str
-    result:str
+    item1:str|None =None
+    item2:str|None =None
+    result:str|None =None
 
 @dataclass
 class Material: # You know, the thing you use to combine stuff???
-    name: str
-    desc: str
+    name: str|None =None
+    desc: str|None =None
     evolve: str | None = None  # The Creature it will evolve to, None by default
 
 @dataclass
 class Creature: # a creature that can be born
-    name: str
-    desc: str
-    appearance: str
-    behavior: str
+    name: str|None =None
+    desc: str|None =None
+    appearance: str|None =None
+    behavior: str|None =None
     evolve: str | None = None # The waifu it will evolve to
 
 # Due to staged Generation, I will try to Initialize everything with None
@@ -47,8 +47,8 @@ class Waifu: # a waifu that can be born from the thing... Or evolve from creatur
 
 @dataclass
 class OwnedWaifu:
-    id: UUID = field(default_factory=uuid4)
-    name: str = "" # Basically, the species name
+    id: str = ""
+    name: str|None =None
     nickname: str = ""
     desc: str | None = None
     appearance: str | None = None
@@ -75,16 +75,16 @@ class OwnedWaifu:
 
 @dataclass
 class Archetype: # an archetype that the waifu can have (Not Auto Generated-ish)
-    name: str
-    desc: str
+    name: str|None =None
+    desc: str|None =None
 
 
 # These are Unused for Now, Will Implement Later
 @dataclass
 class OwnedCreature:
-    name:str
-    nickname:str
-    description:str
+    name:str|None =None
+    nickname:str|None =None
+    description:str|None =None
 
 # I just found the perfect use for this...
 @dataclass

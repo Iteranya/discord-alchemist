@@ -2,7 +2,7 @@ import unittest
 from tinydb import TinyDB
 from dataclasses import asdict
 from data_manager import (
-    User, Material, Creature, Waifu, Archetype, Recipe,
+    Player, Material, Creature, Waifu, Archetype, Recipe,
     create_user, get_user, update_user,
     create_material, get_material,
     create_creature, get_creature,
@@ -25,7 +25,7 @@ class TestDataManager(unittest.TestCase):
         self.db.close()
 
     def test_user_operations(self):
-        user = User(name="TestUser")
+        user = Player(name="TestUser")
         user_id = create_user(user)
         self.assertIsNotNone(user_id)
 
@@ -139,8 +139,8 @@ class TestDataManager(unittest.TestCase):
 
     def test_get_all_operations(self):
         # Create some test data
-        create_user(User(name="TestUser1"))
-        create_user(User(name="TestUser2"))
+        create_user(Player(name="TestUser1"))
+        create_user(Player(name="TestUser2"))
         create_material(Material(name="TestMaterial1", desc="Test Description 1"))
         create_material(Material(name="TestMaterial2", desc="Test Description 2"))
         create_creature(Creature(name="TestCreature1", desc="Test Description 1", appearance="Test Appearance 1",
