@@ -2,7 +2,7 @@
 # I will see to it that I only need to import model and user action
 import asyncio
 import os
-
+import data_manager
 from discord import app_commands
 from dotenv import load_dotenv
 import discord
@@ -108,10 +108,11 @@ async def on_ready():
     # await data_manager.write_attribute_data(await data_manager_json.read_attribute_data())
     # Setup the Connection with API
     db = TinyDB('main_database.json')
+    await config.initialize()
     await config.setup()
     # attribute_info: AttributeInfo = await data_manager.read_attribute_data()
     # format_attribute_info(attribute_info)
-
+    
     setup_rpg_commands()
     asyncio.create_task(main.dungeon_action())
     await tree.sync(guild=None)

@@ -53,6 +53,9 @@ def update_user(user: Player) -> List[int]:  # Used whenever User finishes an ac
 
 # Material functions
 def create_material(material: Material) -> int:  # Used to add material into the list of discovered materials
+    Material_query = Query()
+    if materials_table.get(Material_query.name == material.name):
+        return
     return materials_table.insert(asdict(material))
 
 

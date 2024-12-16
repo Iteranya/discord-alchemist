@@ -15,7 +15,7 @@ def create_user(name: str, desc: str):  # Every user will start here, this is im
         name=name,
         desc=desc,
     )
-    new_user.materials = ["Fire","Water","Earth","Wind"]
+    new_user.materials = ["Fire", "Water","Earth","Wind"]
     data_manager.create_user(new_user)
     # Well... that was easy...
 
